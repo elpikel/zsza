@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace zsza
@@ -20,6 +22,41 @@ namespace zsza
         public void Toad(int position, int leaves, int [] leavePositions, int result)
         {
             Assert.Equal(result, CalculateLeavesNumber(position, leaves, leavePositions));
+        }
+
+        [Theory]
+        [InlineData(5, 7, new [] { 3, 4, 4, 6, 1, 4, 4 }, new [] { 3, 2, 2, 4, 2 })]
+        public void Buttons(int counters, int pushesCount, int [] pushes, int [] result)
+        {
+            Assert.Equal(result, CalculateCounters(counters, pushesCount, pushes));
+        }
+
+        private int[] CalculateCounters(int counters, int pushesCount, int[] pushes)
+        {
+            var counts = new int[counters + 1];
+            var max = 0;
+            var allMax = 0;
+
+            for (int i = 0; i < pushesCount; i++) {
+                if (pushes[i] == counters + 1)
+                {
+                    allMax = max;
+                    continue;
+                }
+
+                if (allMax > counts[pushes[i]])
+                    counts[pushes[i]] = allMax + 1;
+                else
+                    counts[pushes[i]] += 1;
+
+                if (counts[pushes[i]] > max)
+                    max = counts[pushes[i]];
+            }
+
+            return counts
+                .Select(c => c > allMax ? c : allMax)
+                .Skip(1)
+                .ToArray();
         }
 
         private int CalculateLeavesNumber(int position, int leaves, int[] leavePositions)
