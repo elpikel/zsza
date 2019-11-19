@@ -1,13 +1,20 @@
+using System.Linq;
 using Xunit;
 
 namespace zsza
 {
-  public class Unit3
+    public class Unit3
     {
-        [Fact]
-        public void Test()
+        [Theory]
+        [InlineData(7, new int [] { 3, 4, 2, 2, 2, 5, 8 }, 2)]
+        public void LongTape(int amountOfNumbers, int[] numbers, decimal result)
         {
-            Assert.True(true);
+            Assert.Equal(result, GetSmallestAverageArithmetic(numbers));
         }
-    }
+
+        private decimal GetSmallestAverageArithmetic(int[] numbers)
+        {
+            return numbers.Min();
+        }
+  }
 }
