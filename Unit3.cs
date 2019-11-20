@@ -1,11 +1,9 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
 namespace zsza
 {
-  public class Unit3
+    public class Unit3
     {
         [Theory]
         [InlineData(7, new int [] { 3, 4, 2, 2, 2, 5, 8 }, 2)]
