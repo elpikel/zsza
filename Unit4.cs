@@ -50,7 +50,6 @@ namespace zsza
     {
       var sortedHouses = houses
         .OrderBy(h => h.X)
-        .OrderBy(h => h.Y)
         .ToList();
       var smallestDistance = int.MaxValue;
 
